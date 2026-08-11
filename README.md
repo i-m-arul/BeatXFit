@@ -574,3 +574,20 @@ That is the direction for BeatXFit V2.
 **Concept / Interactive Prototype**
 
 This repository currently represents the proposed BeatXFit V2 homepage experience and should be treated as a design and UX prototype until production content, integrations, and brand assets are finalized.
+
+
+## Contact Information
+
+- **Email:** info@beatxfit.com
+- **Phone:** 044 46070999
+- **Mobile / WhatsApp:** +91 9677771106
+- **Address:** 3rd Floor, Old No. 30, New No. 49, N Usman Rd, T. Nagar, Chennai, Tamil Nadu 600017
+- **Instagram:** @beat_xfit
+- **Owner & Trainer:** Jackson Vinodh
+- **Owner Instagram:** @jacksonvinodth
+
+The V4 homepage includes clickable email, phone, WhatsApp, Instagram, and directions links.
+
+## UX Addition — Back to Top
+
+A floating back-to-top control appears at the bottom-left after the visitor scrolls down the page. On mobile, it is positioned above the persistent booking / WhatsApp action bar.
