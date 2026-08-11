@@ -316,6 +316,28 @@ The final accent should follow BeatXFit's approved brand identity.
 - Fake transformations
 - Overly dark nightclub-style gym imagery
 
+
+## Celebrity & Performance Training
+
+The V3 homepage includes a premium performance-credibility section using BeatXFit's supplied celebrity training portfolio.
+
+Current profiles:
+
+- Silambarasan Tesingu Rajendar (STR)
+- Arun Vijay
+- Shirish Saravanan
+- Atharvaa Murali
+- Mahat Raghavendra
+- Akshara Sudhakar Reddy
+- Aishwarya Dutta
+- Niroop Nandakumar
+- Priyanka Deshpande
+
+The homepage intentionally presents this as **performance credibility**, not as a celebrity endorsement wall.
+
+Production usage should include only names, images, testimonials, training details, and claims BeatXFit is authorized to publish.
+
+
 ## Technology
 
 The current prototype is a self-contained HTML/CSS/JavaScript page for concept validation.

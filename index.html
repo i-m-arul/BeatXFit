@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>BeatXFit | Personal Training & Fitness Coaching in Chennai</title>
+<meta name="description" content="Personalized fitness coaching built around your goals. Discover personal training, strength, conditioning and transformation programs at BeatXFit Chennai." />
+<link rel="icon" type="image/x-icon" href="favicon.ico" />
+<link rel="icon" type="image/png" sizes="64x64" href="favicon-64.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png" />
+
+<style>
+:root{
+  --bg:#0b0b0b;
+  --surface:#f3f1eb;
+  --surface2:#e7e3da;
+  --text:#111;
+  --muted:#6d6a64;
+  --white:#fff;
+  --accent:#d6ff2f;
+  --line:rgba(255,255,255,.13);
+  --line-dark:rgba(0,0,0,.11);
+  --radius:26px;
+  --shadow:0 24px 80px rgba(0,0,0,.22);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter, ui-sans-serif, system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  background:var(--surface);
+  color:var(--text);
+  line-height:1.45;
+}
+a{text-decoration:none;color:inherit}
+button,input{font:inherit}
+img{max-width:100%;display:block}
+.container{width:min(1180px,calc(100% - 40px));margin:auto}
+.eyebrow{font-size:.76rem;letter-spacing:.18em;text-transform:uppercase;font-weight:800}
+.display{font-size:clamp(3.4rem,8vw,7.8rem);line-height:.88;letter-spacing:-.06em;margin:0;font-weight:900}
+.h2{font-size:clamp(2.5rem,5vw,5.2rem);line-height:.95;letter-spacing:-.045em;margin:0}
+.h3{font-size:clamp(1.55rem,2.4vw,2.2rem);line-height:1.05;letter-spacing:-.03em}
+.lede{font-size:clamp(1.05rem,1.7vw,1.35rem);max-width:700px;color:#3e3b37}
+.btn{
+  border:0;border-radius:999px;padding:15px 22px;font-weight:800;cursor:pointer;
+  display:inline-flex;align-items:center;justify-content:center;gap:10px;transition:.25s ease
+}
+.btn-primary{background:var(--accent);color:#101010}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(214,255,47,.18)}
+.btn-ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.32)}
+.btn-dark{background:#111;color:#fff}
+.nav{
+  position:fixed;inset:0 0 auto;z-index:50;transition:.3s ease;color:#fff
+}
+.nav.scrolled{background:rgba(10,10,10,.88);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav-inner{height:76px;display:flex;align-items:center;justify-content:space-between}
+.logo{display:inline-flex;align-items:center;line-height:0}
+.brand-logo{display:block;width:auto;height:38px;object-fit:contain}
+.brand-logo.modal-logo{height:36px}
+.brand-logo.footer-logo{height:48px}
+
+.navlinks{display:flex;gap:26px;font-size:.92rem}
+.nav-actions{display:flex;gap:10px;align-items:center}
+.menu{display:none}
+.hero{
+  min-height:100svh;position:relative;background:#090909;color:#fff;overflow:hidden;
+  display:flex;align-items:flex-end
+}
+.hero-media{
+  position:absolute;inset:0;
+  background:
+    linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.14) 30%,rgba(0,0,0,.78) 88%),
+    url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=2200&q=85') center/cover;
+  transform:scale(1.02)
+}
+.hero-glow{
+  position:absolute;right:-120px;top:18%;width:420px;height:420px;border-radius:50%;
+  background:radial-gradient(circle,rgba(214,255,47,.18),transparent 66%);filter:blur(6px)
+}
+.hero-content{position:relative;z-index:2;padding:160px 0 74px}
+.hero-copy{max-width:950px}
+.hero .display{max-width:880px}
+.hero-sub{font-size:clamp(1.1rem,1.8vw,1.35rem);max-width:700px;color:rgba(255,255,255,.78);margin:26px 0 30px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap;margin-top:42px;color:rgba(255,255,255,.7);font-size:.92rem}
+section{padding:110px 0}
+.goal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+.goal{
+  text-align:left;border:1px solid var(--line-dark);background:#fff;border-radius:22px;
+  padding:28px;min-height:210px;cursor:pointer;transition:.25s ease
+}
+.goal:hover,.goal.active{transform:translateY(-4px);border-color:#111;box-shadow:var(--shadow)}
+.goal .num{font-size:.78rem;color:var(--muted);margin-bottom:48px}
+.goal p{color:var(--muted);margin:10px 0 0}
+.goal-result{
+  margin-top:20px;border-radius:22px;background:#111;color:#fff;padding:26px;display:none
+}
+.goal-result.show{display:flex;justify-content:space-between;gap:20px;align-items:center}
+.statement{background:#0c0c0c;color:#fff;overflow:hidden}
+.statement .big{font-size:clamp(3rem,8vw,8rem);letter-spacing:-.06em;line-height:.88;font-weight:900}
+.statement .big span{color:var(--accent)}
+.method-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:50px}
+.method-card{
+  border-top:1px solid var(--line-dark);padding:26px 0 10px;min-height:285px;transition:.25s ease
+}
+.method-card:hover{transform:translateY(-5px)}
+.method-card .step{font-size:.8rem;color:var(--muted);margin-bottom:70px}
+.method-card p{color:var(--muted)}
+.split{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:stretch}
+.media-card{
+  min-height:650px;border-radius:var(--radius);background-size:cover;background-position:center;box-shadow:var(--shadow)
+}
+.copy-card{background:#fff;border-radius:var(--radius);padding:54px;display:flex;flex-direction:column;justify-content:center}
+.checks{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:30px 0}
+.check{border-top:1px solid var(--line-dark);padding-top:12px;font-weight:700}
+
+.celebrity-proof{
+  background:#101010;color:#fff;overflow:hidden
+}
+.celebrity-proof .lede{color:rgba(255,255,255,.66)}
+.celebrity-head{
+  display:grid;grid-template-columns:1.15fr .85fr;gap:40px;align-items:end;margin-bottom:42px
+}
+.celebrity-head .right{
+  display:flex;align-items:flex-end;justify-content:flex-end
+}
+.celeb-strip{
+  display:grid;
+  grid-auto-flow:column;
+  grid-auto-columns:minmax(260px, 1fr);
+  gap:14px;
+  overflow-x:auto;
+  padding:2px 2px 20px;
+  scroll-snap-type:x mandatory;
+  scrollbar-width:thin;
+  scrollbar-color:rgba(255,255,255,.24) transparent;
+}
+.celeb-strip::-webkit-scrollbar{height:6px}
+.celeb-strip::-webkit-scrollbar-thumb{background:rgba(255,255,255,.24);border-radius:999px}
+.celeb-card{
+  scroll-snap-align:start;
+  min-height:430px;
+  border-radius:24px;
+  position:relative;
+  overflow:hidden;
+  background:#1a1a1a;
+  border:1px solid rgba(255,255,255,.10);
+  transition:transform .28s ease,border-color .28s ease
+}
+.celeb-card:hover{transform:translateY(-5px);border-color:rgba(214,255,47,.55)}
+.celeb-photo{
+  position:absolute;inset:0;
+  background-size:cover;background-position:center;
+  transition:transform .55s ease
+}
+.celeb-card:hover .celeb-photo{transform:scale(1.035)}
+.celeb-card:after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.02) 38%,rgba(0,0,0,.9) 100%)
+}
+.celeb-info{
+  position:absolute;z-index:2;left:22px;right:22px;bottom:20px;color:#fff
+}
+.celeb-info .name{
+  font-size:1.45rem;line-height:1.05;font-weight:850;letter-spacing:-.025em;margin-top:7px
+}
+.celeb-info .role{
+  color:rgba(255,255,255,.64);font-size:.9rem;margin-top:7px
+}
+.celeb-note{
+  margin-top:22px;color:rgba(255,255,255,.52);font-size:.86rem;max-width:820px
+}
+.celeb-divider{
+  margin-top:52px;padding-top:34px;border-top:1px solid rgba(255,255,255,.12);
+  display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:center
+}
+.celeb-divider strong{
+  display:block;font-size:clamp(2rem,4vw,4.6rem);line-height:.95;letter-spacing:-.05em
+}
+.celeb-divider strong span{color:var(--accent)}
+@media(max-width:980px){
+  .celebrity-head,.celeb-divider{grid-template-columns:1fr}
+  .celebrity-head .right{justify-content:flex-start}
+  .celeb-strip{grid-auto-columns:minmax(240px,43vw)}
+}
+@media(max-width:650px){
+  .celeb-strip{grid-auto-columns:82vw}
+  .celeb-card{min-height:470px}
+}
+
+.dark{background:#0b0b0b;color:#fff}
+.dark .lede{color:rgba(255,255,255,.68)}
+.stories{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:42px}
+.story{border:1px solid rgba(255,255,255,.12);border-radius:24px;overflow:hidden;background:#131313}
+.story-img{height:330px;background-size:cover;background-position:center}
+.story-body{padding:24px}
+.metrics{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:18px 0}
+.metric{background:#1d1d1d;border-radius:14px;padding:13px}
+.metric strong{display:block;font-size:1.22rem;color:var(--accent)}
+.coaches{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:16px;margin-top:38px}
+.coach{
+  min-height:520px;border-radius:24px;position:relative;overflow:hidden;background-size:cover;background-position:center
+}
+.coach:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 45%,rgba(0,0,0,.88))}
+.coach-info{position:absolute;z-index:2;left:24px;right:24px;bottom:24px;color:#fff}
+.coach-info p{margin:4px 0 0;color:rgba(255,255,255,.75)}
+.community{
+  position:relative;min-height:760px;color:#fff;display:flex;align-items:flex-end;background:
+  linear-gradient(180deg,rgba(0,0,0,.15),rgba(0,0,0,.76)),
+  url('https://images.unsplash.com/photo-1538805060514-97d9cc17730c?auto=format&fit=crop&w=2200&q=85') center/cover
+}
+.community-box{padding:80px 0;max-width:760px}
+.beginner{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.beginner .photo{
+  border-radius:var(--radius);min-height:560px;background:
+  url('https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?auto=format&fit=crop&w=1400&q=85') center/cover
+}
+.timeline{display:grid;grid-template-columns:repeat(5,1fr);gap:0;margin-top:48px;border-top:1px solid var(--line-dark)}
+.timeline-item{padding:28px 24px 0 0;position:relative}
+.timeline-item:before{content:"";position:absolute;width:11px;height:11px;background:#111;border-radius:50%;top:-6px;left:0}
+.timeline-item p{color:var(--muted)}
+.programs{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:38px}
+.program{
+  background:#fff;border-radius:22px;padding:30px;border:1px solid var(--line-dark);min-height:245px;transition:.25s
+}
+.program:hover{transform:translateY(-4px);box-shadow:var(--shadow)}
+.program p{color:var(--muted);max-width:520px}
+.philosophy{background:#111;color:#fff;text-align:center}
+.philosophy-line{font-size:clamp(3rem,7vw,7.2rem);font-weight:900;letter-spacing:-.06em;line-height:.9;margin:22px 0}
+.voices{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+.voice{
+  aspect-ratio:9/15;border-radius:24px;position:relative;overflow:hidden;background-size:cover;background-position:center
+}
+.voice:after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(0,0,0,.85))}
+.voice-copy{position:absolute;z-index:2;left:22px;right:22px;bottom:20px;color:#fff}
+.voice-play{width:52px;height:52px;border-radius:50%;background:rgba(255,255,255,.9);color:#111;display:grid;place-items:center;font-weight:900}
+.quiz-wrap{background:#0c0c0c;color:#fff;border-radius:32px;padding:54px}
+.quiz-options{display:flex;gap:10px;flex-wrap:wrap;margin:24px 0}
+.pill{
+  border:1px solid rgba(255,255,255,.22);background:transparent;color:#fff;padding:12px 17px;border-radius:999px;cursor:pointer
+}
+.pill.active{background:var(--accent);border-color:var(--accent);color:#111}
+.quiz-result{display:none;margin-top:28px;padding:26px;background:#171717;border-radius:20px}
+.quiz-result.show{display:block}
+.founder{display:grid;grid-template-columns:.9fr 1.1fr;gap:26px;align-items:center}
+.founder-photo{
+  min-height:610px;border-radius:var(--radius);background:
+  url('https://images.unsplash.com/photo-1584466977773-e625c37cdd50?auto=format&fit=crop&w=1400&q=85') center/cover
+}
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;grid-template-rows:300px 300px;gap:12px;margin-top:34px}
+.g{border-radius:20px;background-size:cover;background-position:center}
+.g1{grid-row:1/3}
+.faq{max-width:900px;margin:auto}
+.faq-item{border-top:1px solid var(--line-dark);padding:18px 0}
+.faq-q{display:flex;justify-content:space-between;cursor:pointer;font-weight:800;font-size:1.1rem}
+.faq-a{max-height:0;overflow:hidden;color:var(--muted);transition:.3s ease;padding-right:40px}
+.faq-item.open .faq-a{max-height:180px;padding-top:12px}
+.location{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.location-card{background:#111;color:#fff;border-radius:var(--radius);padding:48px}
+.map{
+  border-radius:var(--radius);min-height:520px;background:
+  linear-gradient(rgba(214,255,47,.08),rgba(214,255,47,.08)),
+  repeating-linear-gradient(0deg,#d9d5cd 0 1px,transparent 1px 60px),
+  repeating-linear-gradient(90deg,#d9d5cd 0 1px,transparent 1px 60px),
+  #ece8df;
+  position:relative;overflow:hidden
+}
+.pin{position:absolute;left:56%;top:46%;width:22px;height:22px;background:#111;border-radius:50% 50% 50% 0;transform:rotate(-45deg)}
+.pin:after{content:"";width:8px;height:8px;background:var(--accent);border-radius:50%;position:absolute;left:7px;top:7px}
+.final{
+  min-height:740px;display:flex;align-items:flex-end;color:#fff;background:
+  linear-gradient(180deg,rgba(0,0,0,.2),rgba(0,0,0,.84)),
+  url('https://images.unsplash.com/photo-1599058917212-d750089bc07e?auto=format&fit=crop&w=2200&q=85') center/cover
+}
+.final .container{padding-bottom:86px}
+footer{background:#080808;color:#fff;padding:60px 0 90px}
+.footer-grid{display:grid;grid-template-columns:1.4fr repeat(4,1fr);gap:24px}
+footer h4{font-size:.84rem;text-transform:uppercase;letter-spacing:.14em;color:rgba(255,255,255,.48)}
+footer a{display:block;color:rgba(255,255,255,.75);margin:9px 0}
+.mobile-bar{display:none}
+.modal{
+  position:fixed;inset:0;background:rgba(0,0,0,.74);backdrop-filter:blur(10px);z-index:100;display:none;align-items:center;justify-content:center;padding:20px
+}
+.modal.show{display:flex}
+.modal-card{background:#fff;width:min(620px,100%);border-radius:28px;padding:34px;box-shadow:var(--shadow)}
+.modal-top{display:flex;justify-content:space-between;align-items:center}
+.close{border:0;background:#eee;width:38px;height:38px;border-radius:50%;cursor:pointer}
+.step{display:none}
+.step.active{display:block}
+.option-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:22px 0}
+.option{
+  border:1px solid var(--line-dark);background:#fff;padding:15px;border-radius:14px;text-align:left;cursor:pointer
+}
+.option.active{border-color:#111;background:#111;color:#fff}
+.field{display:grid;gap:7px;margin:14px 0}
+.field input{padding:14px 15px;border-radius:13px;border:1px solid #ccc}
+.progress{height:4px;background:#eee;border-radius:99px;overflow:hidden;margin:24px 0}
+.progress span{display:block;height:100%;background:#111;width:33%;transition:.3s}
+@media(max-width:980px){
+  .navlinks{display:none}.menu{display:inline-flex}
+  .goal-grid{grid-template-columns:1fr 1fr}
+  .method-grid{grid-template-columns:1fr 1fr}
+  .split,.beginner,.founder,.location{grid-template-columns:1fr}
+  .stories,.voices{grid-template-columns:1fr 1fr}
+  .coaches{grid-template-columns:1fr 1fr}
+  .coach:first-child{grid-column:1/3}
+  .timeline{grid-template-columns:1fr;border-top:0}
+  .timeline-item{border-top:1px solid var(--line-dark);padding:24px 0}
+  .timeline-item:before{display:none}
+  .footer-grid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:650px){
+  .container{width:min(100% - 28px,1180px)}
+  section{padding:78px 0}
+  .nav-inner{height:66px}
+  .brand-logo{height:32px}
+  .brand-logo.footer-logo{height:44px}
+  .nav .btn-primary{display:none}
+  .hero-content{padding-bottom:110px}
+  .hero-meta{gap:10px 18px}
+  .goal-grid,.stories,.voices,.programs,.coaches{grid-template-columns:1fr}
+  .coach:first-child{grid-column:auto}
+  .method-grid{grid-template-columns:1fr}
+  .method-card{min-height:auto}
+  .method-card .step{margin-bottom:28px}
+  .copy-card{padding:30px}
+  .checks{grid-template-columns:1fr}
+  .media-card{min-height:430px}
+  .community{min-height:650px}
+  .gallery{grid-template-columns:1fr 1fr;grid-template-rows:260px 200px 200px}
+  .g1{grid-column:1/3;grid-row:auto}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  .mobile-bar{
+    display:grid;grid-template-columns:1fr 1.4fr;position:fixed;bottom:12px;left:12px;right:12px;z-index:60;
+    background:#111;border:1px solid rgba(255,255,255,.12);padding:6px;border-radius:999px;box-shadow:0 14px 40px rgba(0,0,0,.35)
+  }
+  .mobile-bar a,.mobile-bar button{padding:13px;border-radius:999px;border:0;text-align:center;font-weight:800}
+  .mobile-bar a{color:#fff}.mobile-bar button{background:var(--accent)}
+  .option-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<header class="nav" id="nav">
+  <div class="container nav-inner">
+    <a class="logo" href="#top" aria-label="BeatXFit home"><img src="beatxfit-logo.png" alt="BeatXFit" class="brand-logo" /></a>
+    <nav class="navlinks">
+      <a href="#programs">Programs</a>
+      <a href="#method">The BX Method</a>
+      <a href="#stories">Transformations</a>
+      <a href="#coaches">Coaches</a>
+      <a href="#community">Community</a>
+      <a href="#about">About</a>
+    </nav>
+    <div class="nav-actions">
+      <button class="btn btn-primary open-book">Book Your Assessment →</button>
+      <button class="btn btn-ghost menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<section class="hero">
+  <div class="hero-media"></div>
+  <div class="hero-glow"></div>
+  <div class="container hero-content">
+    <div class="hero-copy">
+      <div class="eyebrow">PERSONALIZED FITNESS COACHING · CHENNAI</div>
+      <h1 class="display">Built around you.</h1>
+      <p class="hero-sub">Not another workout plan. A fitness experience designed around your body, your goals and the life you actually live.</p>
+      <div class="hero-actions">
+        <button class="btn btn-primary open-book">BOOK YOUR FITNESS ASSESSMENT →</button>
+        <a class="btn btn-ghost" href="#goals">EXPLORE BEATXFIT ↓</a>
+      </div>
+      <div class="hero-meta">
+        <span>Personal Training</span><span>Strength</span><span>Conditioning</span><span>Transformation</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="goals">
+  <div class="container">
+    <div class="eyebrow">START WITH YOUR GOAL</div>
+    <h2 class="h2">What do you want to change?</h2>
+    <p class="lede">Tell us the goal. We’ll help build the path.</p>
+
+    <div class="goal-grid">
+      <button class="goal" data-goal="Lose Fat"><div class="num">01</div><div class="h3">Lose Fat</div><p>Build sustainable habits and improve body composition.</p></button>
+      <button class="goal" data-goal="Get Stronger"><div class="num">02</div><div class="h3">Get Stronger</div><p>Progressive coaching designed to build real-world strength.</p></button>
+      <button class="goal" data-goal="Build Muscle"><div class="num">03</div><div class="h3">Build Muscle</div><p>Train intelligently with structure, progression and accountability.</p></button>
+      <button class="goal" data-goal="Get Fit Again"><div class="num">04</div><div class="h3">Get Fit Again</div><p>Restart without intimidation or unrealistic expectations.</p></button>
+      <button class="goal" data-goal="Improve Performance"><div class="num">05</div><div class="h3">Improve Performance</div><p>Train strength, conditioning, mobility and endurance.</p></button>
+      <button class="goal" data-goal="Feel Better"><div class="num">06</div><div class="h3">Feel Better</div><p>Move better. Build energy. Make fitness part of your life.</p></button>
+    </div>
+
+    <div class="goal-result" id="goalResult">
+      <div>
+        <div class="eyebrow">YOUR STARTING POINT</div>
+        <div class="h3" id="goalTitle">Let’s personalize it.</div>
+      </div>
+      <button class="btn btn-primary open-book">SEE MY STARTING POINT →</button>
+    </div>
+  </div>
+</section>
+
+<section class="statement">
+  <div class="container">
+    <div class="eyebrow">THE DIFFERENCE</div>
+    <div class="big">A gym gives you <span>access.</span><br/>A coach gives you <span>direction.</span></div>
+    <p class="lede" style="margin-top:30px">BeatXFit combines personalized programming, expert coaching, accountability and progress tracking to help you build fitness that lasts beyond a membership.</p>
+  </div>
+</section>
+
+<section id="method">
+  <div class="container">
+    <div class="eyebrow">HOW BEATXFIT WORKS</div>
+    <h2 class="h2">The BX Method.</h2>
+    <p class="lede">One goal. One plan. Progress that evolves with you.</p>
+    <div class="method-grid">
+      <article class="method-card"><div class="step">01 / ASSESS</div><div class="h3">Understand you.</div><p>Your goals, movement, history and lifestyle become the starting point.</p></article>
+      <article class="method-card"><div class="step">02 / BUILD</div><div class="h3">Build the plan.</div><p>Your program is designed around your capability and goals—not somebody else’s.</p></article>
+      <article class="method-card"><div class="step">03 / COACH</div><div class="h3">Coach the work.</div><p>Your coach guides technique, progression, consistency and accountability.</p></article>
+      <article class="method-card"><div class="step">04 / TRACK</div><div class="h3">Measure progress.</div><p>We track the things that matter for your goal and use them to guide what comes next.</p></article>
+      <article class="method-card"><div class="step">05 / ADAPT</div><div class="h3">Evolve.</div><p>Your plan changes as you become stronger, fitter and more capable.</p></article>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container split">
+    <div class="media-card" style="background-image:url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?auto=format&fit=crop&w=1500&q=85')"></div>
+    <div class="copy-card">
+      <div class="eyebrow">PERSONAL TRAINING</div>
+      <h2 class="h2">You don’t need more workouts.</h2>
+      <p class="lede">You need the right workout.</p>
+      <p>Random exercise creates activity. Structured coaching creates progression. At BeatXFit, training begins with understanding where you are today and where you want to go.</p>
+      <div class="checks">
+        <div class="check">Personalized programming</div><div class="check">Technique coaching</div>
+        <div class="check">Progressive training</div><div class="check">Accountability</div>
+        <div class="check">Progress reviews</div><div class="check">Program adaptation</div>
+      </div>
+      <a href="#programs" class="btn btn-dark">EXPLORE PERSONAL TRAINING →</a>
+    </div>
+  </div>
+</section>
+
+
+<section class="celebrity-proof" id="celebrity-training">
+  <div class="container">
+    <div class="celebrity-head">
+      <div>
+        <div class="eyebrow">CELEBRITY & PERFORMANCE TRAINING</div>
+        <h2 class="h2">Trusted when performance matters.</h2>
+        <p class="lede">BeatXFit has worked with actors, presenters and performers whose fitness goals demand structure, discipline and consistent coaching.</p>
+      </div>
+      <div class="right">
+        <a class="btn btn-ghost" href="#celebrity-training">EXPLORE PERFORMANCE TRAINING →</a>
+      </div>
+    </div>
+
+    <div class="celeb-strip" aria-label="BeatXFit celebrity training clients">
+      
+      <article class="celeb-card">
+        <div class="celeb-photo" style="background-image:url('silambarasan-tr.jpg');background-position:center 20%"></div>
+        <div class="celeb-info">
+          <div class="eyebrow">CELEBRITY TRAINING</div>
+          <div class="name">Silambarasan Tesingu Rajendar <span style="color:var(--accent);font-size:.78em">(STR)</span></div>
+          <div class="role">STR</div>
+        </div>
+      </article>
+      <article class="celeb-card">
+        <div class="celeb-photo" style="background-image:url('arun-vijay.jpg');background-position:center 24%"></div>
+        <div class="celeb-info">
+          <div class="eyebrow">CELEBRITY TRAINING</div>
+          <div class="name">Arun Vijay</div>
+          <div class="role">Actor</div>
+        </div>
+      </article>
+      <article class="celeb-card">
+        <div class="celeb-photo" style="background-image:url('shirish-saravanan.jpg');background-position:center 28%"></div>
+        <div class="celeb-info">
+          <div class="eyebrow">CELEBRITY TRAINING</div>
+          <div class="name">Shirish Saravanan</div>
+          <div class="role">Actor</div>
+        </div>
+      </article>
+      <article class="celeb-card">
+        <div class="celeb-photo" style="background-image:url('atharvaa-murali.jpg');background-position:center 20%"></div>
+        <div class="celeb-info">
+          <div class="eyebrow">CELEBRITY TRAINING</div>
+          <div class="name">Atharvaa Murali</div>
+          <div class="role">Actor</div>
+        </div>
+      </article>
+      <article class="celeb-card">
+        <div class="celeb-photo" style="background-image:url('mahat-raghavendra.jpg');background-position:center 24%"></div>
+        <div class="celeb-info">
+          <div class="eyebrow">CELEBRITY TRAINING</div>
+          <div class="name">Mahat Raghavendra</div>
+          <div class="role">Actor</div>
+        </div>
+      </article>
+      <article class="celeb-card">
+        <div class="celeb-photo" style="background-image:url('akshara-sudhakar-reddy.jpg');background-position:center 18%"></div>
+        <div class="celeb-info">
+          <div class="eyebrow">CELEBRITY TRAINING</div>
+          <div class="name">Akshara Sudhakar Reddy</div>
+          <div class="role">Actor · Model</div>
+        </div>
+      </article>
+      <article class="celeb-card">
+        <div class="celeb-photo" style="background-image:url('aishwarya-dutta.jpg');background-position:center 18%"></div>
+        <div class="celeb-info">
+          <div class="eyebrow">CELEBRITY TRAINING</div>
+          <div class="name">Aishwarya Dutta</div>
+          <div class="role">Actor</div>
+        </div>
+      </article>
+      <article class="celeb-card">
+        <div class="celeb-photo" style="background-image:url('niroop-nandakumar.jpg');background-position:center 24%"></div>
+        <div class="celeb-info">
+          <div class="eyebrow">CELEBRITY TRAINING</div>
+          <div class="name">Niroop Nandakumar</div>
+          <div class="role">Actor</div>
+        </div>
+      </article>
+      <article class="celeb-card">
+        <div class="celeb-photo" style="background-image:url('priyanka-deshpande.jpg');background-position:center 22%"></div>
+        <div class="celeb-info">
+          <div class="eyebrow">CELEBRITY TRAINING</div>
+          <div class="name">Priyanka Deshpande</div>
+          <div class="role">Television Presenter · Entertainer</div>
+        </div>
+      </article>
+    </div>
+
+    <div class="celeb-divider">
+      <strong>Performance-level coaching.<br/><span>Built around you.</span></strong>
+      <div>
+        <p class="lede">You don't have to be preparing for a role or a stage appearance to train with purpose. The same principles—assessment, structure, coaching, progression and adaptation—can be personalized around your goal.</p>
+        <button class="btn btn-primary open-book">BOOK YOUR ASSESSMENT →</button>
+      </div>
+    </div>
+    <p class="celeb-note">Celebrity profiles are presented as BeatXFit training relationships supplied by BeatXFit. Production use of names, photographs and any performance claims should remain limited to content BeatXFit is authorized to publish.</p>
+  </div>
+</section>
+
+<section class="dark" id="stories">
+  <div class="container">
+    <div class="eyebrow">REAL PEOPLE. REAL PROGRESS.</div>
+    <h2 class="h2">The result matters.<br/>So does the journey.</h2>
+    <div class="stories">
+      <article class="story">
+        <div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?auto=format&fit=crop&w=900&q=85')"></div>
+        <div class="story-body">
+          <div class="eyebrow">12 WEEK JOURNEY</div><div class="h3">Priya</div>
+          <p style="color:#bdbdbd">Goal: Build strength and improve body composition.</p>
+          <div class="metrics"><div class="metric"><strong>+28%</strong><span>Strength</span></div><div class="metric"><strong>12 wk</strong><span>Consistency</span></div><div class="metric"><strong>3×</strong><span>Weekly</span></div></div>
+          <small style="color:#888">Illustrative metrics — replace with verified member outcomes.</small>
+        </div>
+      </article>
+      <article class="story">
+        <div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1599058917765-a780eda07a3e?auto=format&fit=crop&w=900&q=85')"></div>
+        <div class="story-body">
+          <div class="eyebrow">16 WEEK JOURNEY</div><div class="h3">Arjun</div>
+          <p style="color:#bdbdbd">Goal: Rebuild fitness after a long break.</p>
+          <div class="metrics"><div class="metric"><strong>16 wk</strong><span>Plan</span></div><div class="metric"><strong>4×</strong><span>Weekly</span></div><div class="metric"><strong>↑</strong><span>Endurance</span></div></div>
+          <small style="color:#888">Use real member-approved data in production.</small>
+        </div>
+      </article>
+      <article class="story">
+        <div class="story-img" style="background-image:url('https://images.unsplash.com/photo-1609899464726-209befaac5bc?auto=format&fit=crop&w=900&q=85')"></div>
+        <div class="story-body">
+          <div class="eyebrow">ONGOING JOURNEY</div><div class="h3">Meera</div>
+          <p style="color:#bdbdbd">Goal: Get stronger and feel more confident training.</p>
+          <div class="metrics"><div class="metric"><strong>↑</strong><span>Confidence</span></div><div class="metric"><strong>3×</strong><span>Weekly</span></div><div class="metric"><strong>1:1</strong><span>Coaching</span></div></div>
+          <small style="color:#888">Photography and names are placeholders.</small>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="coaches">
+  <div class="container">
+    <div class="eyebrow">THE PEOPLE BEHIND THE PROGRESS</div>
+    <h2 class="h2">Coaching changes everything.</h2>
+    <p class="lede">A great coach doesn’t simply count repetitions. They know when to push, when to correct and when to adapt.</p>
+    <div class="coaches">
+      <div class="coach" style="background-image:url('https://images.unsplash.com/photo-1534258936925-c58bed479fcb?auto=format&fit=crop&w=1100&q=85')"><div class="coach-info"><div class="h3">Vinodh</div><p>Founder / Coach · Strength · Transformation · Performance</p></div></div>
+      <div class="coach" style="background-image:url('https://images.unsplash.com/photo-1567013127542-490d757e6349?auto=format&fit=crop&w=800&q=85')"><div class="coach-info"><div class="h3">Coach Name</div><p>Strength · Mobility · Beginners</p></div></div>
+      <div class="coach" style="background-image:url('https://images.unsplash.com/photo-1571019613576-2b22c76fd955?auto=format&fit=crop&w=800&q=85')"><div class="coach-info"><div class="h3">Coach Name</div><p>Conditioning · Transformation</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="community" id="community">
+  <div class="container community-box">
+    <div class="eyebrow">BEYOND FOUR WALLS</div>
+    <h2 class="h2">Fitness should feel alive.</h2>
+    <p class="hero-sub">Some mornings aren’t meant for treadmills. They’re meant for sand under your shoes, a kettlebell in your hands and a team moving beside you.</p>
+    <div class="h3">BeatXFit Beach Bootcamp</div>
+    <p>Strength · Conditioning · Movement · Community · Chennai mornings</p>
+    <button class="btn btn-primary open-book">JOIN A SESSION →</button>
+  </div>
+</section>
+
+<section>
+  <div class="container beginner">
+    <div class="photo"></div>
+    <div class="copy-card">
+      <div class="eyebrow">NEVER TRAINED BEFORE?</div>
+      <h2 class="h2">You don’t need to get fit before joining.</h2>
+      <p class="lede">That’s what we’re here for.</p>
+      <p>You won’t be expected to know the exercises. You won’t be expected to keep up with somebody else. And you won’t be handed a generic workout and left alone.</p>
+      <button class="btn btn-dark open-book">START MY FIRST ASSESSMENT →</button>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="eyebrow">WHAT HAPPENS AFTER YOU START?</div>
+    <h2 class="h2">Your first month at BeatXFit.</h2>
+    <div class="timeline">
+      <div class="timeline-item"><div class="eyebrow">DAY 1</div><div class="h3">Understand</div><p>Goals, history, movement, lifestyle and starting point.</p></div>
+      <div class="timeline-item"><div class="eyebrow">WEEK 1</div><div class="h3">Build</div><p>Your coach creates the initial training approach and movement foundations.</p></div>
+      <div class="timeline-item"><div class="eyebrow">WEEK 2</div><div class="h3">Progress</div><p>Training evolves as your coach learns how your body responds.</p></div>
+      <div class="timeline-item"><div class="eyebrow">WEEK 3</div><div class="h3">Measure</div><p>Review technique, performance, consistency and goal-related progress.</p></div>
+      <div class="timeline-item"><div class="eyebrow">WEEK 4</div><div class="h3">Adapt</div><p>Your plan changes based on what we’ve learned.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="programs">
+  <div class="container">
+    <div class="eyebrow">WAYS TO TRAIN</div>
+    <h2 class="h2">Find the right starting point.</h2>
+    <div class="programs">
+      <article class="program"><div class="eyebrow">01</div><div class="h3">Personal Training</div><p>One-to-one coaching built around your goals and progression.</p><a href="#fitmatch"><b>Explore →</b></a></article>
+      <article class="program"><div class="eyebrow">02</div><div class="h3">Strength & Conditioning</div><p>Structured training to become stronger, fitter and more capable.</p><a href="#fitmatch"><b>Explore →</b></a></article>
+      <article class="program"><div class="eyebrow">03</div><div class="h3">Transformation</div><p>Goal-focused coaching combining training, accountability and progress measurement.</p><a href="#fitmatch"><b>Explore →</b></a></article>
+      <article class="program"><div class="eyebrow">04</div><div class="h3">Beach Bootcamp</div><p>Outdoor conditioning, movement and community training.</p><a href="#community"><b>Explore →</b></a></article>
+      <article class="program"><div class="eyebrow">05</div><div class="h3">Celebrity & Performance Training</div><p>Structured coaching for actors, presenters and performers preparing for demanding goals.</p><a href="#celebrity-training"><b>Explore →</b></a></article>
+    </div>
+  </div>
+</section>
+
+<section class="philosophy">
+  <div class="container">
+    <div class="eyebrow">THE BEATXFIT PHILOSOPHY</div>
+    <div class="philosophy-line">Motivation gets you started.</div>
+    <div class="philosophy-line" style="color:var(--accent)">Consistency changes you.</div>
+    <div class="philosophy-line">Coaching keeps you moving.</div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="eyebrow">MEMBER VOICES</div>
+    <h2 class="h2">What changed for them?</h2>
+    <div class="voices">
+      <div class="voice" style="background-image:url('https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=700&q=85')"><div class="voice-copy"><div class="voice-play">▶</div><h3>“When I joined, my goal was…”</h3><small>00:42 · Placeholder testimonial</small></div></div>
+      <div class="voice" style="background-image:url('https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=700&q=85')"><div class="voice-copy"><div class="voice-play">▶</div><h3>“The biggest difference for me was…”</h3><small>00:31 · Placeholder testimonial</small></div></div>
+      <div class="voice" style="background-image:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?auto=format&fit=crop&w=700&q=85')"><div class="voice-copy"><div class="voice-play">▶</div><h3>“What surprised me about BeatXFit…”</h3><small>00:48 · Placeholder testimonial</small></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="fitmatch">
+  <div class="container">
+    <div class="quiz-wrap">
+      <div class="eyebrow">FITNESS MATCH</div>
+      <h2 class="h2">Not sure where to begin?</h2>
+      <p class="lede">Find your BeatXFit starting point in about 60 seconds.</p>
+
+      <div class="quiz-q">
+        <div class="h3">1. What is your primary goal?</div>
+        <div class="quiz-options" data-group="goal"><button class="pill">Lose Fat</button><button class="pill">Strength</button><button class="pill">Muscle</button><button class="pill">Overall Fitness</button><button class="pill">Performance</button></div>
+      </div>
+      <div class="quiz-q">
+        <div class="h3">2. How often do you currently exercise?</div>
+        <div class="quiz-options" data-group="frequency"><button class="pill">Almost Never</button><button class="pill">1–2× / week</button><button class="pill">3–4× / week</button><button class="pill">5+× / week</button></div>
+      </div>
+      <div class="quiz-q">
+        <div class="h3">3. What support do you want?</div>
+        <div class="quiz-options" data-group="support"><button class="pill">Maximum Coaching</button><button class="pill">Some Guidance</button><button class="pill">Mostly Independent</button></div>
+      </div>
+      <button class="btn btn-primary" id="matchBtn">FIND MY PROGRAM →</button>
+      <div class="quiz-result" id="quizResult">
+        <div class="eyebrow">YOUR STARTING POINT</div>
+        <div class="h3">Personalized Strength & Transformation</div>
+        <p style="color:#bdbdbd">Based on your answers, we’d recommend starting with an assessment before determining your exact training plan.</p>
+        <button class="btn btn-primary open-book">BOOK MY ASSESSMENT →</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container founder">
+    <div class="founder-photo"></div>
+    <div>
+      <div class="eyebrow">WHY BEATXFIT EXISTS</div>
+      <h2 class="h2">Fitness was never supposed to be temporary.</h2>
+      <p class="lede">BeatXFit was built around a simple belief: people don’t need another short-term fitness challenge. They need the knowledge, structure, coaching and consistency to make fitness part of their lives.</p>
+      <p>That philosophy continues to shape how we train today.</p>
+      <a class="btn btn-dark" href="#location">VISIT BEATXFIT →</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="eyebrow">THE SPACE</div>
+    <h2 class="h2">Built to train.</h2>
+    <div class="gallery">
+      <div class="g g1" style="background-image:url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?auto=format&fit=crop&w=1200&q=85')"></div>
+      <div class="g" style="background-image:url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?auto=format&fit=crop&w=800&q=85')"></div>
+      <div class="g" style="background-image:url('https://images.unsplash.com/photo-1590487988256-9ed24133863e?auto=format&fit=crop&w=800&q=85')"></div>
+      <div class="g" style="background-image:url('https://images.unsplash.com/photo-1603287681836-b174ce5074c2?auto=format&fit=crop&w=800&q=85')"></div>
+      <div class="g" style="background-image:url('https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?auto=format&fit=crop&w=800&q=85')"></div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container faq">
+    <div class="eyebrow">FAQ</div>
+    <h2 class="h2">Questions before you start?</h2>
+    <div class="faq-item"><div class="faq-q">I’ve never worked out before. Can I join?<span>+</span></div><div class="faq-a">Absolutely. Your starting point determines your program — not somebody else’s fitness level.</div></div>
+    <div class="faq-item"><div class="faq-q">Do I need to be fit before joining?<span>+</span></div><div class="faq-a">No. BeatXFit is designed to help you build from where you are today.</div></div>
+    <div class="faq-item"><div class="faq-q">Is personal training available?<span>+</span></div><div class="faq-a">Yes. Personal coaching is positioned as one of the core BeatXFit experiences.</div></div>
+    <div class="faq-item"><div class="faq-q">How often should I train?<span>+</span></div><div class="faq-a">That depends on your goal, training history, recovery and schedule. Your assessment helps determine an appropriate starting point.</div></div>
+  </div>
+</section>
+
+<section id="location">
+  <div class="container location">
+    <div class="location-card">
+      <div class="eyebrow">COME MEET US</div>
+      <h2 class="h2">Your next workout could start here.</h2>
+      <p class="lede" style="color:#bbb">BeatXFit · T. Nagar · Chennai</p>
+      <p>Replace this block with the verified full address, hours, phone number and WhatsApp contact before launch.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:28px">
+        <button class="btn btn-primary open-book">BOOK ASSESSMENT</button>
+        <a class="btn btn-ghost" href="#">WHATSAPP US</a>
+      </div>
+    </div>
+    <div class="map"><div class="pin"></div></div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="container">
+    <div class="eyebrow">YOUR NEXT MOVE</div>
+    <h2 class="h2">You already know why you want to change.</h2>
+    <p class="hero-sub">Now build the way forward.</p>
+    <div class="h3" style="margin-bottom:20px">Built around you.</div>
+    <button class="btn btn-primary open-book">BOOK YOUR FITNESS ASSESSMENT →</button>
+  </div>
+</section>
+
+</main>
+
+<footer>
+  <div class="container footer-grid">
+    <div><div class="logo"><img src="beatxfit-logo.png" alt="BeatXFit" class="brand-logo footer-logo" /></div><p style="color:#777;max-width:260px">Built around you.</p></div>
+    <div><h4>Programs</h4><a href="#programs">Personal Training</a><a href="#programs">Strength</a><a href="#programs">Transformation</a><a href="#celebrity-training">Celebrity & Performance</a><a href="#community">Beach Bootcamp</a></div>
+    <div><h4>Company</h4><a href="#about">About</a><a href="#coaches">Coaches</a><a href="#community">Community</a></div>
+    <div><h4>Visit</h4><a href="#location">Location</a><a href="#location">Contact</a><a href="#location">WhatsApp</a></div>
+    <div><h4>Follow</h4><a href="#">Instagram</a><a href="#">YouTube</a><a href="#">Facebook</a></div>
+  </div>
+</footer>
+
+<div class="mobile-bar">
+  <a href="#">WhatsApp</a>
+  <button class="open-book">Book Assessment</button>
+</div>
+
+<div class="modal" id="bookingModal">
+  <div class="modal-card">
+    <div class="modal-top"><div class="logo"><img src="beatxfit-logo.png" alt="BeatXFit" class="brand-logo modal-logo" /></div><button class="close" id="closeModal" aria-label="Close booking form">×</button></div>
+    <div class="progress"><span id="progressBar"></span></div>
+    <div class="step active" data-step="1">
+      <div class="eyebrow">STEP 1 OF 3</div>
+      <h2>What would you like help with?</h2>
+      <div class="option-grid" data-book="goal">
+        <button class="option">Fat Loss</button><button class="option">Strength</button><button class="option">Muscle</button><button class="option">Fitness</button><button class="option">Performance</button><button class="option">Not Sure</button>
+      </div>
+      <button class="btn btn-dark next">CONTINUE →</button>
+    </div>
+    <div class="step" data-step="2">
+      <div class="eyebrow">STEP 2 OF 3</div>
+      <h2>When would you prefer to train?</h2>
+      <div class="option-grid" data-book="time">
+        <button class="option">Morning</button><button class="option">Afternoon</button><button class="option">Evening</button><button class="option">Flexible</button>
+      </div>
+      <button class="btn btn-dark next">CONTINUE →</button>
+    </div>
+    <div class="step" data-step="3">
+      <div class="eyebrow">STEP 3 OF 3</div>
+      <h2>How should we reach you?</h2>
+      <div class="field"><label>Name</label><input id="nameInput" placeholder="Your name" /></div>
+      <div class="field"><label>Mobile</label><input id="phoneInput" placeholder="+91" /></div>
+      <label style="display:flex;gap:9px;align-items:center;margin:14px 0 24px"><input type="checkbox" checked /> WhatsApp preferred</label>
+      <button class="btn btn-primary" id="finishBooking">SUBMIT ASSESSMENT REQUEST →</button>
+    </div>
+    <div class="step" data-step="4">
+      <div class="eyebrow">YOU’RE ALL SET</div>
+      <h2>We’ll take it from here.</h2>
+      <p>In production, this action should send the lead to your CRM/WhatsApp workflow and confirm the appointment request.</p>
+      <button class="btn btn-dark" id="doneBooking">DONE</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const nav=document.getElementById('nav');
+addEventListener('scroll',()=>nav.classList.toggle('scrolled',scrollY>40));
+
+document.querySelectorAll('.goal').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.goal').forEach(x=>x.classList.remove('active'));
+  b.classList.add('active');
+  document.getElementById('goalTitle').textContent='You chose: '+b.dataset.goal+'. Let’s personalize it.';
+  document.getElementById('goalResult').classList.add('show');
+}));
+
+document.querySelectorAll('.faq-q').forEach(q=>q.addEventListener('click',()=>q.parentElement.classList.toggle('open')));
+
+document.querySelectorAll('.quiz-options').forEach(group=>{
+  group.querySelectorAll('.pill').forEach(btn=>btn.addEventListener('click',()=>{
+    group.querySelectorAll('.pill').forEach(x=>x.classList.remove('active'));
+    btn.classList.add('active');
+  }));
+});
+document.getElementById('matchBtn').addEventListener('click',()=>document.getElementById('quizResult').classList.add('show'));
+
+const modal=document.getElementById('bookingModal');
+const closeModal=()=>modal.classList.remove('show');
+document.querySelectorAll('.open-book').forEach(b=>b.addEventListener('click',()=>modal.classList.add('show')));
+document.getElementById('closeModal').addEventListener('click',closeModal);
+document.getElementById('doneBooking').addEventListener('click',closeModal);
+modal.addEventListener('click',e=>{if(e.target===modal) closeModal()});
+
+document.querySelectorAll('.option-grid').forEach(group=>{
+  group.querySelectorAll('.option').forEach(btn=>btn.addEventListener('click',()=>{
+    group.querySelectorAll('.option').forEach(x=>x.classList.remove('active'));
+    btn.classList.add('active');
+  }));
+});
+let step=1;
+function showStep(n){
+  document.querySelectorAll('.step').forEach(s=>s.classList.toggle('active',+s.dataset.step===n));
+  document.getElementById('progressBar').style.width=(n===4?100:n/3*100)+'%';
+}
+document.querySelectorAll('.next').forEach(b=>b.addEventListener('click',()=>{step++;showStep(step)}));
+document.getElementById('finishBooking').addEventListener('click',()=>{step=4;showStep(step)});
+</script>
+</body>
+</html>
